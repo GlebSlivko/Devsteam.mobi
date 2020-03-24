@@ -28,7 +28,7 @@ unsplash com/documentation
  
 ### Install
 $ git clone https://github.com/GlebSlivko/Devsteam.mobi.git
-$ cd Devsteam.mobi.Test-task
+$ cd Devsteam.mobi
 $ npm install
 
 ### Start & watch
