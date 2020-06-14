@@ -1,13 +1,13 @@
 export const initialState = {
-    posts: null,
-    filters:"Ordinary_Drink",
+    categories: null,
+    filters:null,
 };
 
-export default function postReducer(state = initialState, action) {
+export default function categoriesReducer(state = initialState, action) {
     switch (action.type) {
         case 'RECEIVE_CATEGORY': {
             return {...state,
-                posts: action.payload};
+                categories: action.payload};
         }
         case 'FETCH_CATEGORY_FAIL': {
             return {...state};

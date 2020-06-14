@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {StyleSheet,  View, Button} from 'react-native';
+import {StyleSheet, View, Button, TouchableOpacity} from 'react-native';
 import {useDispatch, useSelector} from "react-redux";
 import {useCallback, useEffect, useState} from "react";
 import {fetchCategories,fetchCurrentFilter} from "../redux/actions/categoriesActions";
@@ -27,8 +27,9 @@ export default function FiltersScreen({navigation}) {
         (state) => state.categoriesReducer.categories
     );
 
-    const inputData = (post) => {
-      let inputData = post.map((item,id) => {
+    const inputData = (category) => {
+        // For correct operation of the MultiSelect, the "id" and "name" fields are required!
+      let inputData = category.map((item,id) => {
           item.id = id;
           item.name = item.strCategory;
           return item
@@ -37,6 +38,7 @@ export default function FiltersScreen({navigation}) {
     };
 
     const apply = () => {
+        // The method is necessary in order to get the last from the selected filters and pass it into action
        let lastIndex = selectedItems.slice(-1)[0];
         const filter = category.filter((el,index) => index === lastIndex );
         let filterName = filter[0].strCategory;
@@ -71,11 +73,13 @@ export default function FiltersScreen({navigation}) {
                 hideSubmitButton
             >
             </MultiSelect>
+        <TouchableOpacity >
             <Button
                 title="Apply"
                 color="#000000"
                 onPress={() => apply()}
             />
+        </TouchableOpacity>
         </View>
     );
 }
@@ -91,5 +95,10 @@ const styles = StyleSheet.create({
     text: {
         marginRight: "auto",
         marginLeft: "auto"
+    },
+    button:{
+    width:"95%",
+    marginRight: "auto",
+    marginLeft: "auto"
     }
 });
